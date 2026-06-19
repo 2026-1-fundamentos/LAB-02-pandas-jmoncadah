@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pathlib
+import pandas as pd
+
 def pregunta_04():
     """
     Calcule el promedio de `c2` por cada letra de la `c1` del archivo
@@ -20,3 +23,7 @@ def pregunta_04():
     E    4.785714
     Name: c2, dtype: float64
     """
+    current_dir = pathlib.Path(__file__).parent
+    path = current_dir.parent / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    return tbl0.groupby("c1")["c2"].mean().sort_index()

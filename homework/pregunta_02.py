@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pathlib
+import pandas as pd
+
 def pregunta_02():
     """
     ¿Cuál es la cantidad de columnas en la tabla `tbl0.tsv`?
@@ -14,3 +17,7 @@ def pregunta_02():
     4
 
     """
+    current_dir = pathlib.Path(__file__).parent
+    path = current_dir.parent / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    return tbl0.shape[1]

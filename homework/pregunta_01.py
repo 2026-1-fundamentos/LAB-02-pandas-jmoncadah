@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pathlib
+import pandas as pd
+
 def pregunta_01():
     """
     ¿Cuál es la cantidad de filas en la tabla `tbl0.tsv`?
@@ -14,3 +17,7 @@ def pregunta_01():
     40
 
     """
+    current_dir = pathlib.Path(__file__).parent
+    path = current_dir.parent / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    return tbl0.shape[0]

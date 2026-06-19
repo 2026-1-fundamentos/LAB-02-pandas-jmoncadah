@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pathlib
+import pandas as pd
+
 def pregunta_12():
     """
     Construya una tabla que contenga `c0` y una lista separada por ','
@@ -22,3 +25,9 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+    current_dir = pathlib.Path(__file__).parent
+    path = current_dir.parent / "files" / "input" / "tbl2.tsv"
+    tbl2 = pd.read_csv(path, sep="\t")
+    tbl2["c5"] = tbl2["c5a"].astype(str) + ":" + tbl2["c5b"].astype(str)
+    return tbl2.groupby("c0")["c5"].apply(lambda x: ",".join(sorted(x))).reset_index()
+print(pregunta_12())
